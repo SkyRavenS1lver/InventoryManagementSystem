@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.R
 import revandra.projects.inventorymanagementsystem.databinding.FragmentProductsBinding
+import revandra.projects.inventorymanagementsystem.ui.search.SearchFragmentDirections
 
 
 class ProductsFragment : Fragment() {
@@ -37,6 +39,11 @@ class ProductsFragment : Fragment() {
             }
             db!!.productDao()!!.allProduct(args.idVariant.toString()).observe(requireActivity()){
                 rvProduct.adapter = ProductAdapter(it){product ->
+                    findNavController().navigate(
+                        ProductsFragmentDirections.actionProductsFragmentToEditProductFragment(
+                            product.idProduct
+                        )
+                    )
                 }
                 rvProduct.layoutManager = LinearLayoutManager(requireContext())
             }

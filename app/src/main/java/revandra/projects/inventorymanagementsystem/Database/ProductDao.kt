@@ -15,6 +15,9 @@ interface ProductDao {
     @get:Query("SELECT * from products")
     val allProducts: LiveData<List<Product>>
 
+    @Query("SELECT * from products where idProduct = :string")
+    fun productFromId(string: String): Product
+
     @Query("SELECT * from products where idVariant = :idV")
     fun allProduct(idV: String): LiveData<List<Product>>
     @Query("SELECT SUM(stock) from products where idVariant = :string")

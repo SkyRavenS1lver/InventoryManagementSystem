@@ -13,6 +13,8 @@ interface VariantDAO {
     fun insert(variant: Variant)
 
     @Query("SELECT * from variants where idCategory = :string")
-    fun variantFromId(string: String): LiveData<List<Variant>>
+    fun variantFromIdCategory(string: String): LiveData<List<Variant>>
 
+    @Query("SELECT name from variants where idVariant = :string")
+    fun variantFromId(string: String): String
 }

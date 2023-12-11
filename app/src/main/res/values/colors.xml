@@ -12,4 +12,5 @@
     <color name="medical">#9D530E</color>
     <color name="sport">#A64A4A</color>
     <color name="clothing">#FF0505</color>
+    <color name="btn_bg">#1D5204</color>
 </resources>

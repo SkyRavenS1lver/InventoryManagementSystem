@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Product
@@ -18,9 +19,6 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val db by lazy {
         Databases.getDatabase(requireContext())
-    }
-    private val searchResult by lazy {
-        arrayListOf<Product>()
     }
 
     override fun onCreateView(
@@ -35,6 +33,11 @@ class SearchFragment : Fragment() {
             db!!.productDao()!!.allProducts.observe(requireActivity()){
 
                 rvSearch.adapter = ProductAdapter(it){product ->
+                    findNavController().navigate(
+                        SearchFragmentDirections.actionNavigationSearchToEditProductFragment(
+                            product.idProduct
+                        )
+                    )
 
                 }
                 rvSearch.layoutManager = LinearLayoutManager(requireContext())

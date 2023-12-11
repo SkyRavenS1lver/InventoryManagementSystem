@@ -29,7 +29,7 @@ class VariantFragment : Fragment() {
             val args: VariantFragmentArgs by navArgs()
             title.text = args.name
             image.setBackgroundResource(args.IDPHOTO)
-            db!!.variantDao()!!.variantFromId((args.position+1).toString()).observe(requireActivity()){
+            db!!.variantDao()!!.variantFromIdCategory((args.position+1).toString()).observe(requireActivity()){
                 rvVariant.adapter = VariantAdapter(requireActivity(), it){variant->
                     findNavController().navigate(
                         VariantFragmentDirections.actionVariantFragmentToProductsFragment(
