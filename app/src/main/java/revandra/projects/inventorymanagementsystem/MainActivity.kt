@@ -19,16 +19,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         val navView = binding.navView
         navView.itemIconTintList = null
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+        intent.getStringExtra("destination").also {
+            when(it){
+                "profile"->{
+                    navController.popBackStack()
+                    navController.navigate(R.id.profileFragment)
+                }
+            }
+        }
         navView.setOnNavigationItemSelectedListener {
-            if (it.itemId == R.id.navigation_dashboard){
-                startActivity(Intent(this, Dashboard::class.java))
-                finish()
+            when (it.itemId) {
+                R.id.navigation_dashboard -> {
+                    startActivity(Intent(this, Dashboard::class.java))
+                    finish()
+                }
+                R.id.navigation_search -> {
+                    navController.navigate(R.id.navigation_search)
+                }
+                R.id.navigation_category -> {
+                    navController.navigate(R.id.navigation_category)
+                }
             }
             true
         }

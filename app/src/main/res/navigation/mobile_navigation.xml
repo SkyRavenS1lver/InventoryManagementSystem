@@ -2,24 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/profileFragment"
+    >
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="revandra.projects.inventorymanagementsystem.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:id="@+id/navigation_search"
+        android:name="revandra.projects.inventorymanagementsystem.ui.home.SearchFragment"
+        android:label="@string/title_1"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="revandra.projects.inventorymanagementsystem.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_2"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="revandra.projects.inventorymanagementsystem.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_category"
+        android:name="revandra.projects.inventorymanagementsystem.ui.notifications.CategoryFragment"
+        android:label="@string/title_3"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/changePassword"
+        android:name="revandra.projects.inventorymanagementsystem.ui.profile.ChangePassword"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+
 </navigation>

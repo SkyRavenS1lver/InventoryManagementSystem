@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
-import android.widget.Button
 import androidx.core.widget.addTextChangedListener
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.User
 import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
+import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
 import revandra.projects.inventorymanagementsystem.databinding.ActivityLoginBinding
 import java.util.concurrent.Executors
 
 class Login : AppCompatActivity() {
+    private val prefManager by lazy {
+        SharedPrefManager.getInstance(this)
+    }
     private val binding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
@@ -51,14 +54,15 @@ class Login : AppCompatActivity() {
     }
 
     fun login(view: View) {
-        if (!binding.username.text.isEmpty() && !binding.password.text.isEmpty()){
+        if (binding.username.text.isNotEmpty() && binding.password.text.isNotEmpty()){
             Executors.newSingleThreadExecutor().execute {
-                if((db?.loginDao()
-                        ?.login(
-                            binding.username.text.toString(),
-                            binding.password.text.toString()
-                        ) ?: "") != ""
-                ){
+                val result = (db?.loginDao()
+                    ?.login(
+                        binding.username.text.toString(),
+                        binding.password.text.toString()
+                    ) ?: User())
+                if(result.username != ""){
+                    prefManager.login(result.role,result.username)
                     startActivity(Intent(this, Dashboard::class.java))
                 }
             }

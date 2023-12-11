@@ -30,14 +30,14 @@ abstract class Databases : RoomDatabase(){
                             User(
                                 username = "admin",
                                 password = "password",
-                                role = "admin"
+                                role = "Admin"
                             )
                         )
                         INSTANCE!!.loginDao()!!.insert(
                             User(
                                 username = "superAdmin",
                                 password = "password",
-                                role = "superAdmin"
+                                role = "Super Admin"
                             )
                         )
                     }

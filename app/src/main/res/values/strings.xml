@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Inventory Management System</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_1">Search</string>
+    <string name="title_2">Dashboard</string>
+    <string name="title_3">Category</string>
     <string name="toast_back">Click once again to exit apps</string>
-    <string name="logged">Login Success!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
