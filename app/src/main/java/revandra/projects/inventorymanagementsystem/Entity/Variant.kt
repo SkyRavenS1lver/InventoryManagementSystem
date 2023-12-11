@@ -10,4 +10,8 @@ data class Variant(
     @ColumnInfo(name = "idCategory") val idCategory: Int =0,
     @ColumnInfo(name = "imgPath") var imgPath: String = "",
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "idVariant") val idVariant: Int =0,
-)
+){
+    override fun toString(): String {
+        return name
+    }
+}

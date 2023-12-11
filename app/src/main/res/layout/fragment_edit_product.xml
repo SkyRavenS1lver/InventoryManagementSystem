@@ -237,6 +237,7 @@
         android:text="Save"
         app:cornerRadius="20dp"
         android:fontFamily="@font/poppinsbold"
+        android:textAllCaps="false"
         />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_btn"

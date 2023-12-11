@@ -89,5 +89,10 @@
             android:name="id_product"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.addPage.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 
 </navigation>

@@ -22,6 +22,9 @@ interface ProductDao {
     @Query("SELECT * from products where idProduct = :string")
     fun productFromId(string: String): Product
 
+    @Query("SELECT SUM(stock) from products where idCategory = :string")
+    fun productFromCategory(string: String):LiveData<Int>
+
     @Query("SELECT * from products where idVariant = :idV")
     fun allProduct(idV: String): LiveData<List<Product>>
     @Query("SELECT SUM(stock) from products where idVariant = :string")

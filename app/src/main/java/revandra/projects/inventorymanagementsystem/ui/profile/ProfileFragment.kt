@@ -46,4 +46,8 @@ class ProfileFragment : Fragment() {
         startActivity(Intent(context, Login::class.java))
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

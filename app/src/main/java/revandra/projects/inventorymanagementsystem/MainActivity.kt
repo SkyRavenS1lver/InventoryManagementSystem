@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.navView
         navView.itemIconTintList = null
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        navView.setupWithNavController(navController)
         intent.getStringExtra("destination").also {
             when(it){
                 "profile"->{
@@ -37,6 +36,10 @@ class MainActivity : AppCompatActivity() {
                     navController.popBackStack()
                     navController.navigate(R.id.navigation_search)
                 }
+                "add"->{
+                    navController.popBackStack()
+                    navController.navigate(R.id.mainFragment)
+                }
             }
         }
         navView.setOnNavigationItemSelectedListener {
@@ -46,10 +49,14 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.navigation_search -> {
-                    navController.navigate(R.id.navigation_search)
+                    if (navController.currentDestination?.id != R.id.navigation_search){
+                        navController.navigate(R.id.navigation_search)
+                    }
                 }
                 R.id.navigation_category -> {
-                    navController.navigate(R.id.navigation_category)
+                    if (navController.currentDestination?.id != R.id.navigation_category){
+                        navController.navigate(R.id.navigation_category)
+                    }
                 }
             }
             true
