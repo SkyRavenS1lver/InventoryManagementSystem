@@ -1,12 +1,23 @@
 package revandra.projects.inventorymanagementsystem.Entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import revandra.projects.inventorymanagementsystem.R
 
-@Entity(tableName = "category")
+
 data class Category(
-    @PrimaryKey @ColumnInfo(name = "username") val username: String = "",
-    @ColumnInfo(name = "password") val password: String = "",
-    @ColumnInfo(name = "role") val role: String = "",
-)
+    val name: String = "",
+    val idPhoto: Int = 0,
+) {
+    companion object {
+        val categoryList by lazy {
+            arrayListOf(
+                Category("Electronics", R.drawable.electronics),
+                Category("Office Supplies", R.drawable.office),
+                Category("Kitchen Supplies", R.drawable.kitchen),
+                Category("Medical Equipment", R.drawable.med),
+                Category("Tools", R.drawable.tool),
+                Category("Clothing and Accessories", R.drawable.clothes),
+                Category("Sports Equipment", R.drawable.basket),
+            )
+        }
+    }
+}

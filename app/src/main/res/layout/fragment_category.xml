@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundBlack"
+    tools:context=".ui.categories.CategoryFragment">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bread_crumb"
+        android:paddingLeft="24dp"
+        android:backgroundTint="@color/white"
+        android:layout_width="wrap_content"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/breadcrumbs_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Categories"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppinsbold"
+        android:drawableLeft="@drawable/add"
+        android:paddingVertical="4dp"
+        android:drawablePadding="12dp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bread_crumb" />
+</androidx.constraintlayout.widget.ConstraintLayout>

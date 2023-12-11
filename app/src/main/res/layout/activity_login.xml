@@ -41,11 +41,13 @@
                 android:background="@drawable/edit_text_shadow"
                 android:hint="Username"
                 android:padding="12dp"
+                android:maxLength="20"
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 />
             <EditText android:id="@+id/password"
+                android:maxLength="20"
                 android:fontFamily="@font/poppinsregular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

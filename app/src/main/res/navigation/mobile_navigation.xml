@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_category"
-        android:name="revandra.projects.inventorymanagementsystem.ui.notifications.CategoryFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.categories.CategoryFragment"
         android:label="@string/title_3"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="revandra.projects.inventorymanagementsystem.ui.profile.ProfileFragment"
