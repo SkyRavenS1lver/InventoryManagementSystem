@@ -8,7 +8,7 @@ import revandra.projects.inventorymanagementsystem.databinding.ProductRvBinding
 
 
 typealias OnClick = (Product) -> Unit
-class ProductAdapter(private val productList:List<Product>, private val onClick: OnClick)
+class ProductAdapter(private var productList:List<Product>, private val onClick: OnClick)
     : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>()   {
     inner class ProductViewHolder(private val binding: ProductRvBinding)
         :RecyclerView.ViewHolder(binding.root) {
@@ -33,5 +33,9 @@ class ProductAdapter(private val productList:List<Product>, private val onClick:
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.bind(productList[position])
+    }
+    fun setData(list:List<Product>){
+        productList = list
+        notifyDataSetChanged()
     }
 }

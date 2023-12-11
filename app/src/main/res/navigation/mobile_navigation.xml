@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="revandra.projects.inventorymanagementsystem.ui.home.SearchFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.search.SearchFragment"
         android:label="@string/title_1"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
