@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id ("androidx.navigation.safeargs.kotlin")
+
 
 }
 
@@ -61,4 +63,7 @@ dependencies {
 
     //Pie Chart
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

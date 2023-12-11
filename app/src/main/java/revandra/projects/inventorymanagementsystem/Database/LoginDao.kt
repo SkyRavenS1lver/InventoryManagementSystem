@@ -18,8 +18,6 @@ interface LoginDao {
     @Query("SELECT * from users where username = :username and password = :password limit 1")
     fun login(username:String, password:String): User
 
-//    Query("SELECT * from users where username = :username and password = :password limit 1")
-//    fun login(username:String, password:String): LiveData<User>
 
     @get:Query("SELECT * from users")
     val users:LiveData<List<User>>

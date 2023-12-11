@@ -29,6 +29,14 @@ class MainActivity : AppCompatActivity() {
                     navController.popBackStack()
                     navController.navigate(R.id.profileFragment)
                 }
+                "category"->{
+                    navController.popBackStack()
+                    navController.navigate(R.id.navigation_category)
+                }
+                "search"->{
+                    navController.popBackStack()
+                    navController.navigate(R.id.navigation_search)
+                }
             }
         }
         navView.setOnNavigationItemSelectedListener {

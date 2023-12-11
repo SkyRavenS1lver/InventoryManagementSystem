@@ -21,16 +21,56 @@
         android:id="@+id/navigation_category"
         android:name="revandra.projects.inventorymanagementsystem.ui.categories.CategoryFragment"
         android:label="@string/title_3"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_navigation_category_to_variantFragment"
+            app:destination="@id/variantFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="revandra.projects.inventorymanagementsystem.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+    </fragment>
     <fragment
         android:id="@+id/changePassword"
         android:name="revandra.projects.inventorymanagementsystem.ui.profile.ChangePassword"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/variantFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.variant.VariantFragment"
+        android:label="fragment_variant"
+        tools:layout="@layout/fragment_variant" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="IDPHOTO"
+            app:argType="integer" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_variantFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.product.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+    <argument
+        android:name="name"
+        app:argType="string" />
+    <argument
+        android:name="photo"
+        app:argType="string" />
+    <argument
+        android:name="idVariant"
+        app:argType="integer" />
+    </fragment>
 
 </navigation>

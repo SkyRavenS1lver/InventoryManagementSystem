@@ -12,7 +12,7 @@ data class Category(
             arrayListOf(
                 Category("Electronics", R.drawable.electronics),
                 Category("Office Supplies", R.drawable.office),
-                Category("Kitchen Supplies", R.drawable.kitchen),
+                Category("Kitchen Appliances", R.drawable.kitchen),
                 Category("Medical Equipment", R.drawable.med),
                 Category("Tools", R.drawable.tool),
                 Category("Clothing and Accessories", R.drawable.clothes),

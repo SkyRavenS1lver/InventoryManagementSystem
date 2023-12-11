@@ -6,16 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.databinding.CategoryRvBinding
 
-class CategoryAdapter(private val categoryList:ArrayList<Category>)
+typealias OnClick = (Category, Int) -> Unit
+class CategoryAdapter(private val categoryList:ArrayList<Category>, private val onClick: OnClick)
     : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>()  {
 
-
-
     inner class CategoryViewHolder(private val binding:CategoryRvBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(data:Category){
+        fun bind(data:Category, int: Int){
             with(binding){
                 title.text = data.name
                 image.setBackgroundResource(data.idPhoto)
+                itemView.setOnClickListener {
+                    onClick(data, int)
+                }
             }
         }
     }
@@ -30,6 +32,6 @@ class CategoryAdapter(private val categoryList:ArrayList<Category>)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(categoryList[position])
+        holder.bind(categoryList[position], position)
     }
 }

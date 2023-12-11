@@ -16,6 +16,7 @@
             android:backgroundTint="@color/white"
             android:layout_width="wrap_content"
             android:minWidth="250dp"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:background="@drawable/breadcrumbs_bg"
             app:layout_constraintTop_toTopOf="parent"
