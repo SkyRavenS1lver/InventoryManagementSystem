@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         val navView = binding.navView
         navView.itemIconTintList = null
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

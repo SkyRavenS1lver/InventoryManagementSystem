@@ -1,10 +1,12 @@
 package revandra.projects.inventorymanagementsystem.ui.editProduct
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,6 +16,8 @@ import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.Entity.Product
 import revandra.projects.inventorymanagementsystem.R
 import revandra.projects.inventorymanagementsystem.databinding.FragmentEditProductBinding
+import revandra.projects.inventorymanagementsystem.ui.addPage.product.AddProductFragment
+import java.io.File
 import java.util.concurrent.Executors
 
 class EditProductFragment : Fragment() {
@@ -23,7 +27,8 @@ class EditProductFragment : Fragment() {
         Databases.getDatabase(requireContext())
     }
     private val stock = MutableLiveData(0)
-    private val currentProduct = MutableLiveData<Product?>(Product())
+    private val currentProduct = MutableLiveData(Product())
+    private val photos = MutableLiveData("")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +48,29 @@ class EditProductFragment : Fragment() {
                     nameTv.text = it.name
                     descriptionTv.text = it.description
                     stock.postValue(it.stock)
-                    if (it.imagePath == ""){ image.setImageResource(R.drawable.resource_default) }
-                    else{ Glide.with(requireContext()).load(it.imagePath).into(image) }
+                    photos.postValue(it.imagePath)
+//                    if (it.imagePath == ""){ image.setImageResource(R.drawable.resource_default) }
+//                    else{
+//                        try {
+//                            Glide.with(requireContext()).load(Uri.parse(it.imagePath)).into(image)
+//                        }
+//                        catch (e:Exception){
+//                            image.setImageResource(R.drawable.resource_default)
+//                        }
+//                    }
+                }
+            }
+            photos.observe(requireActivity()){
+                if (it == ""){
+                    image.setImageResource(R.drawable.resource_default)
+                }
+                else{
+                    try {
+                        Glide.with(requireContext()).load(Uri.parse(it)).into(image)
+                    }
+                    catch (e:Exception){
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             stock.observe(requireActivity()){

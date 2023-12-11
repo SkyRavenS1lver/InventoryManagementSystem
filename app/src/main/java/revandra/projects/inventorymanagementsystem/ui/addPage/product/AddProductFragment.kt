@@ -1,6 +1,10 @@
 package revandra.projects.inventorymanagementsystem.ui.addPage.product
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +12,20 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import revandra.projects.inventorymanagementsystem.Dashboard
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Category
-import revandra.projects.inventorymanagementsystem.Entity.Variant
-import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.Entity.Product
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
 import revandra.projects.inventorymanagementsystem.databinding.FragmentAddProductBinding
 import java.util.concurrent.Executors
 
 class AddProductFragment : Fragment() {
+    private val SELECT_IMAGE_REQUEST = 1
+    private var selectedImagePath: String = ""
 
     private var _binding: FragmentAddProductBinding? = null
     private val binding get() = _binding!!
@@ -27,6 +34,7 @@ class AddProductFragment : Fragment() {
         Databases.getDatabase(requireContext())
     }
     private var selectedVarId:Int = -1
+    private var selectedCatId:Int = -1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +48,7 @@ class AddProductFragment : Fragment() {
                 )
             spinnerCat.onItemSelectedListener = object : OnItemSelectedListener{
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    selectedCatId = p2+1
                     db!!.variantDao()!!.variantFromIdCategory((p2+1).toString()).observe(requireActivity()){
                         binding.variantContainer.visibility = View.VISIBLE
                         binding.spinnerVar.adapter = ArrayAdapter(
@@ -59,9 +68,49 @@ class AddProductFragment : Fragment() {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                 }
             }
+            image.setOnClickListener {
+                startActivityForResult(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    ,SELECT_IMAGE_REQUEST)
+            }
+            insertBtn.setOnClickListener {
+                if (etProduct.text.isNotBlank() && etDescription.text.isNotBlank() && etStock.text.isNotBlank()
+                    && selectedImagePath.isNotEmpty()){
+                    Executors.newSingleThreadExecutor().execute {
+                        db!!.productDao()!!.insert(
+                            Product(
+                                etProduct.text.toString(),
+                                selectedCatId,selectedVarId,
+                                etStock.text.toString().toInt(),
+                                etDescription.text.toString(),
+                                selectedImagePath
+                            )
+                        )
+                        startActivity(Intent(requireContext(), Dashboard::class.java))
+                        requireActivity().finish()
+                    }
+
+                }
+                else{
+                    CustomToastMaker.makeCustomToast(requireContext(), "Please fill out every form and picture")}
+            }
+
 
         }
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SELECT_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri: Uri = data.data!!
+            println("===========")
+            println(selectedImageUri)
+            selectedImagePath = selectedImageUri.toString()
+            println(selectedImageUri)
+            Glide.with(this)
+                .load(selectedImageUri)
+                .into(binding.image)
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

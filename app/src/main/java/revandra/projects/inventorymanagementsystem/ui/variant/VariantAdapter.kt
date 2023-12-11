@@ -1,9 +1,11 @@
 package revandra.projects.inventorymanagementsystem.ui.variant
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Variant
 import revandra.projects.inventorymanagementsystem.R
@@ -40,6 +42,14 @@ class VariantAdapter(private val context: FragmentActivity, private val variantL
                 if (data.imgPath == ""){
                     image.setBackgroundResource(defaultPhotos[data.idVariant-1])
                     data.imgPath = defaultPhotos[data.idVariant-1].toString()
+                }
+                else{
+                    try {
+                        Glide.with(itemView.context).load(Uri.parse(data.imgPath)).into(image)
+                    }
+                    catch (e:Exception){
+                        image.setImageResource(R.drawable.resource_default)
+                    }
                 }
                 itemView.setOnClickListener {
                     onClick(data)

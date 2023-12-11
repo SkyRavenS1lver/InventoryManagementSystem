@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import revandra.projects.inventorymanagementsystem.Database.Databases
-import revandra.projects.inventorymanagementsystem.Entity.User
+import androidx.core.app.ActivityCompat
 import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
-import java.util.concurrent.Executors
+import android.Manifest
+import android.content.pm.PackageManager
 
 
 class SplashScreen : AppCompatActivity() {
@@ -21,6 +19,8 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.READ_EXTERNAL_STORAGE), PackageManager.PERMISSION_GRANTED)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN

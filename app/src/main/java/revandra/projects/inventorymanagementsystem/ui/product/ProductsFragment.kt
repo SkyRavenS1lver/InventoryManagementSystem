@@ -1,10 +1,12 @@
 package revandra.projects.inventorymanagementsystem.ui.product
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +37,12 @@ class ProductsFragment : Fragment() {
                 image.setBackgroundResource(img)
             }
             catch (e:Exception){
-                Glide.with(requireContext()).load(args.photo).into(image)
+                try {
+                    Glide.with(requireContext()).load(Uri.parse(args.photo)).into(image)
+                }
+                catch (e:Exception){
+                    image.setBackgroundResource(R.drawable.resource_default)
+                }
             }
             db!!.productDao()!!.allProduct(args.idVariant.toString()).observe(requireActivity()){
                 rvProduct.adapter = ProductAdapter(it){product ->
