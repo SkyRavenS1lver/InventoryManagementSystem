@@ -20,7 +20,7 @@ interface ProductDao {
     val allProducts: LiveData<List<Product>>
 
     @Query("SELECT * from products where idProduct = :string")
-    fun productFromId(string: String): Product
+    fun productFromId(string: String): LiveData<Product>
 
     @Query("SELECT SUM(stock) from products where idCategory = :string")
     fun productFromCategory(string: String):LiveData<Int>

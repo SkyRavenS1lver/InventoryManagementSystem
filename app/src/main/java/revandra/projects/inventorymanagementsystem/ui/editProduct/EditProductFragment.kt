@@ -38,8 +38,8 @@ class EditProductFragment : Fragment() {
 
         _binding = FragmentEditProductBinding.inflate(LayoutInflater.from(requireContext()))
         with(binding){
-            Executors.newSingleThreadExecutor().execute {
-                db!!.productDao()!!.productFromId(args.idProduct.toString()).also {
+
+                db!!.productDao()!!.productFromId(args.idProduct.toString()).observe(requireActivity()) {
                     currentProduct.postValue(it)
                     categoryTv.text = Category.categoryList[it.idCategory-1].name
                     Executors.newSingleThreadExecutor().execute {
@@ -49,17 +49,8 @@ class EditProductFragment : Fragment() {
                     descriptionTv.text = it.description
                     stock.postValue(it.stock)
                     photos.postValue(it.imagePath)
-//                    if (it.imagePath == ""){ image.setImageResource(R.drawable.resource_default) }
-//                    else{
-//                        try {
-//                            Glide.with(requireContext()).load(Uri.parse(it.imagePath)).into(image)
-//                        }
-//                        catch (e:Exception){
-//                            image.setImageResource(R.drawable.resource_default)
-//                        }
-//                    }
                 }
-            }
+
             photos.observe(requireActivity()){
                 if (it == ""){
                     image.setImageResource(R.drawable.resource_default)
@@ -69,7 +60,7 @@ class EditProductFragment : Fragment() {
                         Glide.with(requireContext()).load(Uri.parse(it)).into(image)
                     }
                     catch (e:Exception){
-                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                        image.setImageResource(R.drawable.resource_default)
                     }
                 }
             }
@@ -95,6 +86,13 @@ class EditProductFragment : Fragment() {
                         findNavController().popBackStack()
                     }
                 }
+            }
+            editBtn.setOnClickListener {
+                findNavController().navigate(
+                    EditProductFragmentDirections.actionEditProductFragmentToEditDetailFragment(
+                        args.idProduct
+                    )
+                )
             }
         }
 

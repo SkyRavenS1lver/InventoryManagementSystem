@@ -14,4 +14,12 @@ data class Variant(
     override fun toString(): String {
         return name
     }
+
+    override fun equals(other: Any?): Boolean {
+        return if (this.idVariant == other){
+            true
+        } else{
+            super.equals(other)
+        }
+    }
 }

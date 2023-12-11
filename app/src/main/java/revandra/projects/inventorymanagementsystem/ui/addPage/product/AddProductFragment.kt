@@ -12,8 +12,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import revandra.projects.inventorymanagementsystem.Dashboard
 import revandra.projects.inventorymanagementsystem.Database.Databases
@@ -103,8 +101,6 @@ class AddProductFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SELECT_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri: Uri = data.data!!
-            println("===========")
-            println(selectedImageUri)
             selectedImagePath = selectedImageUri.toString()
             println(selectedImageUri)
             Glide.with(this)

@@ -73,6 +73,7 @@
                 app:cardCornerRadius="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,14 +85,16 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
+                            android:layout_gravity="center"
                             android:textColor="@color/black"
                             android:layout_weight="3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="Variants"
+                            android:text="Category"
                             />
                         <TextView
+                            android:layout_gravity="center"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -99,7 +102,7 @@
                             android:text=":"
                             />
                         <Spinner
-                            android:id="@+id/variant"
+                            android:id="@+id/spinner_cat"
                             android:textColor="@color/black"
                             android:layout_marginLeft="2dp"
                             android:layout_weight="1"
@@ -113,14 +116,18 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
+                            android:layout_gravity="center"
+
                             android:textColor="@color/black"
                             android:layout_weight="3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="Category"
+                            android:text="Variants"
                             />
                         <TextView
+                            android:layout_gravity="center"
+
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -128,7 +135,7 @@
                             android:text=":"
                             />
                         <Spinner
-                            android:id="@+id/category_tv"
+                            android:id="@+id/spinner_var"
                             android:textColor="@color/black"
                             android:layout_marginLeft="2dp"
                             android:layout_weight="1"
@@ -137,6 +144,7 @@
                             android:fontFamily="@font/poppinssemibold"
                             />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -157,7 +165,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <com.google.android.material.textview.MaterialTextView
+                            <EditText
                                 android:id="@+id/description_tv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

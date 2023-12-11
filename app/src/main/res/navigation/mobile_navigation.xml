@@ -88,11 +88,23 @@
         <argument
             android:name="id_product"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_editProductFragment_to_editDetailFragment"
+            app:destination="@id/editDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="revandra.projects.inventorymanagementsystem.ui.addPage.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/editDetailFragment"
+        android:name="revandra.projects.inventorymanagementsystem.ui.editProduct.EditDetailFragment"
+        android:label="fragment_edit_detail"
+        tools:layout="@layout/fragment_edit_detail" >
+        <argument
+            android:name="id_product"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
