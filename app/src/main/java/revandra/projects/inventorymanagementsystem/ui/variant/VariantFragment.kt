@@ -39,7 +39,7 @@ class VariantFragment : Fragment() {
                         )
                     )
                 }
-                rvVariant.layoutManager = LinearLayoutManager(requireContext())
+                rvVariant.layoutManager = LinearLayoutManager(context)
             }
         }
         return binding.root

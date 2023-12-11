@@ -203,6 +203,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
         <EditText
+            android:inputType="number"
             android:id="@+id/stock_count"
             android:gravity="center"
             android:backgroundTint="@android:color/transparent"

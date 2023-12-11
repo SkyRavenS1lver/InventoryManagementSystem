@@ -38,7 +38,7 @@ class CategoryFragment : Fragment() {
                         )
                     findNavController().navigate(action)
                 }
-                layoutManager = GridLayoutManager(requireContext(),2)
+                layoutManager = GridLayoutManager(context,2)
             }
 
         }

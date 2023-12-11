@@ -31,7 +31,6 @@ class SearchFragment : Fragment() {
         with(binding){
 
             db!!.productDao()!!.allProducts.observe(requireActivity()){
-
                 rvSearch.adapter = ProductAdapter(it){product ->
                     findNavController().navigate(
                         SearchFragmentDirections.actionNavigationSearchToEditProductFragment(
@@ -40,7 +39,7 @@ class SearchFragment : Fragment() {
                     )
 
                 }
-                rvSearch.layoutManager = LinearLayoutManager(requireContext())
+                rvSearch.layoutManager = LinearLayoutManager(context)
                 searchBar.addTextChangedListener {text->
                     if (it?.isEmpty() == true){
                         (rvSearch.adapter as ProductAdapter).setData(it)

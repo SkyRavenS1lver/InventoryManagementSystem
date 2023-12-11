@@ -45,7 +45,7 @@ class ProductsFragment : Fragment() {
                         )
                     )
                 }
-                rvProduct.layoutManager = LinearLayoutManager(requireContext())
+                rvProduct.layoutManager = LinearLayoutManager(context)
             }
 
         }
