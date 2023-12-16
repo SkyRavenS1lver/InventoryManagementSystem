@@ -80,6 +80,59 @@ abstract class Databases : RoomDatabase(){
                     "12th Gen Intel® Core™ i3-1215U (10 MB cache, 6 cores, 8 threads, up to 4.40 GHz Turbo)"
                 ),
             )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Normal Desk",
+                    2,
+                    6,
+                    10,
+                    "Just your regular desk"
+                ),
+            )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Normal Spoon",
+                    3,
+                    13,
+                    10,
+                    "Just your regular spoon"
+                ),
+            )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Normal Celcius Thermometer",
+                    4,
+                    16,
+                    10,
+                    "In Celcius"
+                ),
+            )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Jack's Hammer",
+                    5,
+                    19,
+                    10,
+                    "It's Jack's"
+                ),
+            )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Blue Shirt",
+                    6, 23,
+                    10,
+                    "It's Free"
+                ),
+            )
+            INSTANCE!!.productDao()!!.insert(
+                Product(
+                    "A Ball",
+                    7,
+                    27,
+                    10,
+                    "It's Ligma"
+                ),
+            )
         }
 
         private fun addDefaultVariants() {
