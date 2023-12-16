@@ -80,10 +80,10 @@ class AddProductFragment : Fragment() {
                     Executors.newSingleThreadExecutor().execute {
                         db!!.productDao()!!.insert(
                             Product(
-                                etProduct.text.toString(),
+                                etProduct.text.toString().trim(),
                                 selectedCatId,selectedVarId,
                                 etStock.text.toString().toInt(),
-                                etDescription.text.toString(),
+                                etDescription.text.toString().trim(),
                                 selectedImagePath
                             )
                         )

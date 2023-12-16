@@ -119,10 +119,10 @@ class EditDetailFragment : Fragment() {
                 Executors.newSingleThreadExecutor().execute {
                     db!!.productDao()!!.update(
                         Product(
-                            nameTv.text.toString(),
+                            nameTv.text.toString().trim(),
                             selectedCatId, selectedVarId,
                             currentProduct.value?.stock?:0,
-                            descriptionTv.text.toString(),
+                            descriptionTv.text.toString().trim(),
                             selectedImagePath,
                             args.idProduct,
                         )

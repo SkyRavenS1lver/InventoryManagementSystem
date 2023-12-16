@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.User
@@ -36,6 +37,22 @@ class ChangePassword : Fragment() {
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         val root: View = binding.root
         with(binding){
+            etConfPw.addTextChangedListener {
+                if (it?.isEmpty() == true){
+                    confirmPw.error = "Please fill out this form"
+                }
+                else{
+                    confirmPw.error = null
+                }
+            }
+            etNewPw.addTextChangedListener {
+                if (it?.isEmpty() == true){
+                    newPW.error = "Please fill out this form"
+                }
+                else{
+                    newPW.error = null
+                }
+            }
             resetPW.setOnClickListener {
                 var success = true
                 if (etConfPw.text.toString() == ""){
@@ -68,7 +85,7 @@ class ChangePassword : Fragment() {
             db!!.loginDao()!!.update(
                 User(
                     prefManager.currentUname(),
-                    binding.etConfPw.text.toString(),
+                    binding.etConfPw.text.toString().trim(),
                     prefManager.isLogged()
                 )
             )

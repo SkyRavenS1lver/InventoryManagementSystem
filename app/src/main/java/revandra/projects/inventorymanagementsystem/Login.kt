@@ -99,6 +99,6 @@ class Login : AppCompatActivity() {
     }
 
     fun loginCheck(username:String, password:String):User{
-        return db?.loginDao()?.login(username, password) ?: User()
+        return db?.loginDao()?.login(username.trim(), password.trim()) ?: User()
     }
 }

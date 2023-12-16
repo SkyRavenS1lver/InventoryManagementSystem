@@ -63,7 +63,7 @@ class AddVariantFragment : Fragment() {
                 Executors.newSingleThreadExecutor().execute {
                     db!!.variantDao()!!.insert(
                         Variant(
-                            etVariant.text.toString(),
+                            etVariant.text.toString().trim(),
                             catId,
                             selectedImagePath
                         )

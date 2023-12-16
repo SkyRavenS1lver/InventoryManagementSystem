@@ -15,11 +15,6 @@
             app:destination="@id/editProductFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="revandra.projects.inventorymanagementsystem.ui.dashboard.DashboardFragment"
-        android:label="@string/title_2"
-        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_category"
