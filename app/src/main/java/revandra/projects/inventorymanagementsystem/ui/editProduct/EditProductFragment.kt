@@ -15,6 +15,7 @@ import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.Entity.Product
 import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
 import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
 import revandra.projects.inventorymanagementsystem.databinding.FragmentEditProductBinding
 import revandra.projects.inventorymanagementsystem.ui.addPage.product.AddProductFragment
@@ -93,6 +94,7 @@ class EditProductFragment : Fragment() {
                 }
                 currentProduct.observe(requireActivity()){
                     if (currentProduct.value == null){
+                        CustomToastMaker.makeCustomToast(requireContext(), "Stock Successfully Changed")
                         findNavController().popBackStack()
                     }
                 }

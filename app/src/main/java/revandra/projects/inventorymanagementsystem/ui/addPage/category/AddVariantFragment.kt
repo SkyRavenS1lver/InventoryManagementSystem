@@ -12,11 +12,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import revandra.projects.inventorymanagementsystem.Dashboard
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.Entity.Variant
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
 import revandra.projects.inventorymanagementsystem.databinding.FragmentAddVariantBinding
 import java.util.concurrent.Executors
 
@@ -30,6 +32,9 @@ class AddVariantFragment : Fragment() {
     private val binding get() = _binding!!
     private val db by lazy {
         Databases.getDatabase(requireContext())
+    }
+    private val isSuccess by lazy {
+        MutableLiveData<Boolean?>(null)
     }
 
     override fun onCreateView(
@@ -63,8 +68,14 @@ class AddVariantFragment : Fragment() {
                             selectedImagePath
                         )
                     )
-                    startActivity(Intent(requireContext(), Dashboard::class.java))
-                    requireActivity().finish()
+                    isSuccess.postValue(true)
+                }
+                isSuccess.observe(requireActivity()){
+                    if (it == true){
+                        CustomToastMaker.makeCustomToast(requireContext(), "Variant Added Successfully")
+                        startActivity(Intent(requireContext(), Dashboard::class.java))
+                        requireActivity().finish()
+                    }
                 }
 
             }

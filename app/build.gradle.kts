@@ -8,6 +8,9 @@ plugins {
 }
 
 android {
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
     namespace = "revandra.projects.inventorymanagementsystem"
     compileSdk = 34
 
@@ -53,12 +56,18 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("com.google.truth:truth:1.0.1")
+    androidTestImplementation ("android.arch.core:core-testing:1.0.0")
 
     //Room
     implementation("androidx.room:room-runtime:2.6.1")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     kapt("androidx.room:room-compiler:2.6.1")
 
     //Pie Chart

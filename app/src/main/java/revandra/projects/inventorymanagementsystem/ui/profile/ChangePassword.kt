@@ -64,7 +64,6 @@ class ChangePassword : Fragment() {
     }
 
     private fun ResetPassword() {
-        binding.resetPW.isEnabled = false
         Executors.newSingleThreadExecutor().execute {
             db!!.loginDao()!!.update(
                 User(

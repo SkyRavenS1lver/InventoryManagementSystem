@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import revandra.projects.inventorymanagementsystem.Entity.Category
-import revandra.projects.inventorymanagementsystem.R
 import revandra.projects.inventorymanagementsystem.databinding.FragmentCategoryBinding
-import revandra.projects.inventorymanagementsystem.ui.categories.recyclerViewComp.CategoryAdapter
 
 class CategoryFragment : Fragment() {
 

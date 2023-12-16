@@ -1,5 +1,7 @@
 package revandra.projects.inventorymanagementsystem.ui.profile
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import revandra.projects.inventorymanagementsystem.Login
 import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
 import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
 import revandra.projects.inventorymanagementsystem.databinding.FragmentProfileBinding
 
@@ -42,9 +45,18 @@ class ProfileFragment : Fragment() {
     }
 
     private fun Logout(){
-        prefManager.logout()
-        startActivity(Intent(context, Login::class.java))
-    }
+        val alert  = AlertDialog.Builder(requireContext())
+            alert.setTitle("Alert")
+            .setMessage("Are you sure to log out from application?")
+            .setPositiveButton("Yes"){ _, _ ->
+                prefManager.logout()
+                CustomToastMaker.makeCustomToast(requireContext(), "Successfully Logged Out")
+                startActivity(Intent(context, Login::class.java))
+            }.also {
+                    it.setNegativeButton("No"){_,_->it.create().dismiss()}
+                    it.show()
+                }
+            }
 
     override fun onDestroyView() {
         super.onDestroyView()

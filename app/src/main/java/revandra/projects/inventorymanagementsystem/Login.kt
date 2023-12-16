@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.User
 import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
@@ -24,6 +25,7 @@ class Login : AppCompatActivity() {
         Databases.getDatabase(this)
     }
     private var mLastClickTime:Long = 0
+    private val currentUser = MutableLiveData<User?>(null)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,24 +53,26 @@ class Login : AppCompatActivity() {
                 binding.password.error = null
             }
         }
-    }
-
-    fun login(view: View) {
-        if (binding.username.text.isNotEmpty() && binding.password.text.isNotEmpty()){
-            Executors.newSingleThreadExecutor().execute {
-                val result = (db?.loginDao()
-                    ?.login(
-                        binding.username.text.toString(),
-                        binding.password.text.toString()
-                    ) ?: User())
-                if(result.username != ""){
-                    prefManager.login(result.role,result.username)
+        currentUser.observe(this){
+            if (it != null){
+                if(it.username != ""){
+                    prefManager.login(it.role,it.username)
+                    CustomToastMaker.makeCustomToast(this, "Login Success")
                     startActivity(Intent(this, Dashboard::class.java))
                 }
                 else{
                     binding.username.error = "Username or password is incorrect!"
                     binding.password.error = "Username or password is incorrect!"
                 }
+            }
+        }
+    }
+
+    fun login(view: View) {
+        if (binding.username.text.isNotEmpty() && binding.password.text.isNotEmpty()){
+            Executors.newSingleThreadExecutor().execute {
+                currentUser.postValue(loginCheck(binding.username.text.toString(),
+                    binding.password.text.toString()))
             }
         }
         else{
@@ -92,5 +96,9 @@ class Login : AppCompatActivity() {
         else{
             super.onBackPressed()
         }
+    }
+
+    fun loginCheck(username:String, password:String):User{
+        return db?.loginDao()?.login(username, password) ?: User()
     }
 }

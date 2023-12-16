@@ -15,11 +15,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import revandra.projects.inventorymanagementsystem.Dashboard
 import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.Entity.Product
 import revandra.projects.inventorymanagementsystem.Entity.Variant
 import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
 import revandra.projects.inventorymanagementsystem.databinding.FragmentEditDetailBinding
 import revandra.projects.inventorymanagementsystem.databinding.FragmentEditProductBinding
 import revandra.projects.inventorymanagementsystem.ui.variant.VariantAdapter
@@ -41,6 +43,9 @@ class EditDetailFragment : Fragment() {
     private var selectedVarId:Int = -1
     private var selectedCatId:Int = -1
     private var isSelected = false
+    private val isSuccess by lazy {
+        MutableLiveData<Boolean?>(null)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,8 +127,14 @@ class EditDetailFragment : Fragment() {
                             args.idProduct,
                         )
                     )
+                    isSuccess.postValue(true)
                 }
-                findNavController().popBackStack()
+            }
+            isSuccess.observe(requireActivity()){
+                if (it == true){
+                    CustomToastMaker.makeCustomToast(requireContext(), "Product Detail Successfully Changed")
+                    findNavController().popBackStack()
+                }
             }
         }
         return binding.root

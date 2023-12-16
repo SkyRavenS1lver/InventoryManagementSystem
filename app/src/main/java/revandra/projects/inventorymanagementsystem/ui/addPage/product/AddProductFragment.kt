@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import revandra.projects.inventorymanagementsystem.Dashboard
 import revandra.projects.inventorymanagementsystem.Database.Databases
@@ -30,6 +31,9 @@ class AddProductFragment : Fragment() {
 
     private val db by lazy {
         Databases.getDatabase(requireContext())
+    }
+    private val isSuccess by lazy {
+        MutableLiveData<Boolean?>(null)
     }
     private var selectedVarId:Int = -1
     private var selectedCatId:Int = -1
@@ -83,13 +87,19 @@ class AddProductFragment : Fragment() {
                                 selectedImagePath
                             )
                         )
-                        startActivity(Intent(requireContext(), Dashboard::class.java))
-                        requireActivity().finish()
+                        isSuccess.postValue(true)
                     }
 
                 }
                 else{
                     CustomToastMaker.makeCustomToast(requireContext(), "Please fill out every form and picture")}
+            }
+            isSuccess.observe(requireActivity()){
+                if (it == true){
+                    CustomToastMaker.makeCustomToast(requireContext(), "Product Added Successfully")
+                    startActivity(Intent(requireContext(), Dashboard::class.java))
+                    requireActivity().finish()
+                }
             }
 
 
