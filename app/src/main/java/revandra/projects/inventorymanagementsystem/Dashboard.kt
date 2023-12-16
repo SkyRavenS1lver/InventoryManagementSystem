@@ -11,6 +11,8 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import revandra.projects.inventorymanagementsystem.Database.Databases
+import revandra.projects.inventorymanagementsystem.Utility.CustomToastMaker
+import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
 import revandra.projects.inventorymanagementsystem.databinding.ActivityDashboardBinding
 import java.util.concurrent.Executors
 
@@ -22,6 +24,9 @@ class Dashboard : AppCompatActivity() {
     private val db by lazy {
         Databases.getDatabase(this)
     }
+    private val prefManager by lazy {
+        SharedPrefManager.getInstance(this)
+    }
     lateinit var data1: LiveData<Int>
     lateinit var data2: LiveData<Int>
     lateinit var data3: LiveData<Int>
@@ -32,26 +37,30 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val chartList = arrayListOf<PieEntry>()
-        chartList.add(PieEntry(0f, "Electronics"))
-        chartList.add(PieEntry(0f, "Office"))
-        chartList.add(PieEntry(0f, "Kitchen"))
-        chartList.add(PieEntry(0f, "Medical"))
-        chartList.add(PieEntry(0f, "Tools"))
-        chartList.add(PieEntry(0f, "Clothes"))
-        chartList.add(PieEntry(0f, "Sport"))
+        if (prefManager.isLogged() == "Super Admin") {
+            binding.bgAdmin.visibility = View.GONE
+            binding.containerChart.visibility = View.VISIBLE
+            binding.btnAdd.visibility = View.VISIBLE
+            val chartList = arrayListOf<PieEntry>()
+            chartList.add(PieEntry(0f, "Electronics"))
+            chartList.add(PieEntry(0f, "Office"))
+            chartList.add(PieEntry(0f, "Kitchen"))
+            chartList.add(PieEntry(0f, "Medical"))
+            chartList.add(PieEntry(0f, "Tools"))
+            chartList.add(PieEntry(0f, "Clothes"))
+            chartList.add(PieEntry(0f, "Sport"))
 
 
-        Executors.newSingleThreadExecutor().execute {
-            data1 = db!!.productDao()!!.productFromCategory("1")
-            data2 = db!!.productDao()!!.productFromCategory("2")
-            data3 = db!!.productDao()!!.productFromCategory("3")
-            data4 = db!!.productDao()!!.productFromCategory("4")
-            data5 = db!!.productDao()!!.productFromCategory("5")
-            data6 = db!!.productDao()!!.productFromCategory("6")
-            data7 = db!!.productDao()!!.productFromCategory("7")
-        }
-        Thread.sleep(100)
+            Executors.newSingleThreadExecutor().execute {
+                data1 = db!!.productDao()!!.productFromCategory("1")
+                data2 = db!!.productDao()!!.productFromCategory("2")
+                data3 = db!!.productDao()!!.productFromCategory("3")
+                data4 = db!!.productDao()!!.productFromCategory("4")
+                data5 = db!!.productDao()!!.productFromCategory("5")
+                data6 = db!!.productDao()!!.productFromCategory("6")
+                data7 = db!!.productDao()!!.productFromCategory("7")
+            }
+            Thread.sleep(100)
 
             var dataset = PieDataSet(chartList, "")
             val colored = mutableListOf(
@@ -64,7 +73,7 @@ class Dashboard : AppCompatActivity() {
                 getColor(R.color.sport),
             )
             dataset.colors = colored
-            with(binding.chart){
+            with(binding.chart) {
                 data = PieData(dataset)
                 data.setValueTextColor(getColor(R.color.white))
                 description.isEnabled = false
@@ -74,8 +83,8 @@ class Dashboard : AppCompatActivity() {
                 setDrawSliceText(false)
                 setEntryLabelColor(getColor(R.color.white))
                 invalidate()
-                data1.observe(this@Dashboard){
-                    if (it!=null) {
+                data1.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[0] = PieEntry(it.toFloat(), "Electronics")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -84,8 +93,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data2.observe(this@Dashboard){
-                    if (it!=null) {
+                data2.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[1] = PieEntry(it.toFloat(), "Office")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -94,8 +103,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data3.observe(this@Dashboard){
-                    if (it!=null) {
+                data3.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[2] = PieEntry(it.toFloat(), "Kitchen")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -104,8 +113,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data4.observe(this@Dashboard){
-                    if (it!=null) {
+                data4.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[3] = PieEntry(it.toFloat(), "Medical")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -114,8 +123,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data5.observe(this@Dashboard){
-                    if (it!=null) {
+                data5.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[4] = PieEntry(it.toFloat(), "Tools")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -124,8 +133,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data6.observe(this@Dashboard){
-                    if (it!=null) {
+                data6.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[5] = PieEntry(it.toFloat(), "Clothes")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -134,8 +143,8 @@ class Dashboard : AppCompatActivity() {
                         invalidate()
                     }
                 }
-                data7.observe(this@Dashboard){
-                    if (it!=null) {
+                data7.observe(this@Dashboard) {
+                    if (it != null) {
                         chartList[6] = PieEntry(it.toFloat(), "Sport")
                         dataset = PieDataSet(chartList, "")
                         dataset.colors = colored
@@ -145,6 +154,12 @@ class Dashboard : AppCompatActivity() {
                     }
                 }
             }
+        }
+        else{
+            binding.bgAdmin.visibility = View.VISIBLE
+            binding.containerChart.visibility = View.GONE
+            binding.btnAdd.visibility = View.GONE
+        }
 
 
 
@@ -157,7 +172,7 @@ class Dashboard : AppCompatActivity() {
         }
         else if (SystemClock.elapsedRealtime() - mLastClickTime > 3000){
             mLastClickTime = SystemClock.elapsedRealtime()
-            Toast.makeText(this, getString(R.string.toast_back), Toast.LENGTH_SHORT).show()
+            CustomToastMaker.makeCustomToast(this, getString(R.string.toast_back))
         }
         else{
             super.onBackPressed()

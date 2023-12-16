@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import revandra.projects.inventorymanagementsystem.Database.Databases
-import revandra.projects.inventorymanagementsystem.Entity.Product
 import revandra.projects.inventorymanagementsystem.databinding.FragmentSearchBinding
 import revandra.projects.inventorymanagementsystem.ui.product.ProductAdapter
 
@@ -20,6 +19,7 @@ class SearchFragment : Fragment() {
     private val db by lazy {
         Databases.getDatabase(requireContext())
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +47,14 @@ class SearchFragment : Fragment() {
                     else {(rvSearch.adapter as ProductAdapter).setData(
                         it.filter { product ->
                         product.name.lowercase().contains(text.toString().lowercase())
-                    })}
+                    }.also {
+                        if (it.isEmpty()){
+                            placeHolder.visibility = View.VISIBLE
+                        }
+                            else{
+                            placeHolder.visibility = View.GONE
+                            }
+                        })}
                 }
             }
         }

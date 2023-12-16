@@ -24,6 +24,7 @@ class ProductsFragment : Fragment() {
     private val db by lazy {
         Databases.getDatabase(requireContext())
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +46,8 @@ class ProductsFragment : Fragment() {
                 }
             }
             db!!.productDao()!!.allProduct(args.idVariant.toString()).observe(requireActivity()){
+                if (it.isEmpty()){placeHolder.visibility = View.VISIBLE}
+                else{placeHolder.visibility = View.GONE}
                 rvProduct.adapter = ProductAdapter(it){product ->
                     findNavController().navigate(
                         ProductsFragmentDirections.actionProductsFragmentToEditProductFragment(

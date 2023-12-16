@@ -65,6 +65,18 @@ class Login : AppCompatActivity() {
                     prefManager.login(result.role,result.username)
                     startActivity(Intent(this, Dashboard::class.java))
                 }
+                else{
+                    binding.username.error = "Username or password is incorrect!"
+                    binding.password.error = "Username or password is incorrect!"
+                }
+            }
+        }
+        else{
+            if (binding.username.text.isEmpty()){
+                binding.username.error = "Username cannot be empty!"
+            }
+            if (binding.password.text.isEmpty()){
+                binding.password.error = "Password cannot be empty!"
             }
         }
     }

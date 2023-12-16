@@ -15,6 +15,7 @@ import revandra.projects.inventorymanagementsystem.Database.Databases
 import revandra.projects.inventorymanagementsystem.Entity.Category
 import revandra.projects.inventorymanagementsystem.Entity.Product
 import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.Utility.SharedPrefManager
 import revandra.projects.inventorymanagementsystem.databinding.FragmentEditProductBinding
 import revandra.projects.inventorymanagementsystem.ui.addPage.product.AddProductFragment
 import java.io.File
@@ -29,6 +30,9 @@ class EditProductFragment : Fragment() {
     private val stock = MutableLiveData(0)
     private val currentProduct = MutableLiveData(Product())
     private val photos = MutableLiveData("")
+    private val prefManager by lazy {
+        SharedPrefManager.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +40,15 @@ class EditProductFragment : Fragment() {
     ): View {
         val args:EditProductFragmentArgs by navArgs()
 
+
         _binding = FragmentEditProductBinding.inflate(LayoutInflater.from(requireContext()))
         with(binding){
-
+            if (prefManager.isLogged() == "Admin"){
+                editBtn.visibility = View.GONE
+            }
+            else{
+                editBtn.visibility = View.VISIBLE
+            }
                 db!!.productDao()!!.productFromId(args.idProduct.toString()).observe(requireActivity()) {
                     currentProduct.postValue(it)
                     categoryTv.text = Category.categoryList[it.idCategory-1].name

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundBlack"
     tools:context=".Dashboard">
+    <ImageView
+        android:id="@+id/bg_admin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/frame_17"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/container_button"
+        />
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/bread_crumb"
         android:layout_width="wrap_content"
@@ -167,10 +177,11 @@
     </androidx.cardview.widget.CardView>
 
     <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/container_chart"
+        android:id="@+id/container_button"
+        android:maxHeight="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_gravity="bottom"
@@ -228,6 +239,7 @@
                 android:onClick="toSearch"
                 />
             <Button
+                android:id="@+id/btn_add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:fontFamily="@font/poppinsbold"
                 android:layout_width="match_parent"
