@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import revandra.projects.inventorymanagementsystem.R
+import revandra.projects.inventorymanagementsystem.databinding.ToastViewBinding
 
 
 class CustomToastMaker {
     companion object{
         fun makeCustomToast(context: Context, string: String){
             val toast = Toast.makeText(context, string, Toast.LENGTH_SHORT)
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = inflater.inflate(R.layout.toast_view, null)
-            val text: TextView = view.findViewById(R.id.toastText)
-            text.text = string
-            toast.setView(view)
+            val binding:ToastViewBinding = ToastViewBinding.inflate(LayoutInflater.from(context))
+            binding.toastText.text = string
+            toast.setView(binding.root)
             toast.show()
         }
     }

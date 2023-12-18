@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
 
     private fun Logout(){
         val alert  = AlertDialog.Builder(requireContext())
-            alert.setTitle("Alert")
+        alert.setTitle("Alert")
             .setMessage("Are you sure to log out from application?")
             .setPositiveButton("Yes"){ _, _ ->
                 prefManager.logout()

@@ -64,6 +64,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation ("com.google.truth:truth:1.0.1")
     androidTestImplementation ("android.arch.core:core-testing:1.0.0")
+    androidTestImplementation ("androidx.test:core-ktx:1.5.0")
+    androidTestImplementation ("com.android.support.test:rules:1.0.2")
+    androidTestImplementation ("com.android.support.test:runner:1.0.2")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.4.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.0")
 
     //Room
     implementation("androidx.room:room-runtime:2.6.1")
